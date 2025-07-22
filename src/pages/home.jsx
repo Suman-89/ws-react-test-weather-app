@@ -11,7 +11,7 @@ export default function Home() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState("");
 
-    // console.log(weatherData)
+  // console.log(weatherData)
   const fetchWeatherDetails = async () => {
     setError("");
     try {
@@ -28,23 +28,42 @@ export default function Home() {
     }
   };
 
-  useEffect(()=>{
-    if(cityName){
-        fetchWeatherDetails();
+  useEffect(() => {
+    if (cityName) {
+      fetchWeatherDetails();
     }
-  },[tempUnit])
+  }, [tempUnit]);
 
   return (
     <>
-      <h2 className="display-5">My Weather App</h2>
-      <SearchPlace onSearch={fetchWeatherDetails} setCityName={setCityName} />
-      <ToogleTempUnit tempUnit={tempUnit} setTempUnit={setTempUnit} />
-      {error && 
-        <div className="alert alert-light" role="alert">
-          {error}
+    <div className="opacity-75 my-4">
+      <div className="card my-4">
+        <div className="card-body">
+          <h2 className="display-5">My Weather App</h2>
+          <SearchPlace
+            onSearch={fetchWeatherDetails}
+            setCityName={setCityName}
+          />
+          <ToogleTempUnit tempUnit={tempUnit} setTempUnit={setTempUnit} />
+          {error && (
+            <div className="card my-4">
+              <div className="card-body">
+                <div className="alert alert-light" role="alert">
+                  {error}
+                </div>
+              </div>
+            </div>
+          )}
+          {weatherData && (
+            <div className="card my-4">
+              <div className="card-body">
+                <Weather weatherData={weatherData} tempUnit={tempUnit} />
+              </div>
+            </div>
+          )}
         </div>
-      }
-      {weatherData && <Weather weatherData={weatherData} tempUnit={tempUnit}/>}
+      </div>
+      </div>
     </>
   );
 }

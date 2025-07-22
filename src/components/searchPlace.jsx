@@ -14,7 +14,7 @@ export default function SearchPlace({setCityName, onSearch}) {
           onChange={(event)=>setCityName(event.target.value)}
         />
         <button
-          className="btn btn-outline-info"
+          className="btn btn-info"
           type="button"
           id="button-addon2"
           onClick={onSearch}
